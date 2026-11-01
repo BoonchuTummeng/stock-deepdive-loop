@@ -1,0 +1,14 @@
+{
+  "name": "boonchu-loop",
+  "description": "วงวิจัยหุ้นครบวงเข้าคลังความรู้ สำหรับ Claude Code และ Codex",
+  "owner": {
+    "name": "boonchu"
+  },
+  "plugins": [
+    {
+      "name": "stock-deepdive-loop",
+      "source": "./plugins/stock-deepdive-loop",
+      "description": "วงวิจัยหุ้นครบวง L0–L8 ต่อจากคลัง MyStock — คำถามกับเอกสารต้นฉบับ เขียนเป็นคลื่น ด่านตรวจ 4–6 ด่าน แล้วเข้าคลัง (atom · entity · watchlist) เพื่อการศึกษา ไม่ใช่คำแนะนำซื้อขาย"
+    }
+  ]
+}

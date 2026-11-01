@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "stock-deepdive-loop",
+  "displayName": "Stock DeepDive Loop",
+  "version": "0.1.0",
+  "description": "วงวิจัยหุ้นครบวง L0–L8 — อ่านคลังเดิม → ตั้งคำถาม → เอกสารต้นฉบับ → เขียนเป็นคลื่น → ด่านตรวจ 4–6 ด่าน → เข้าคลัง (atom · entity · watchlist) เพื่อการศึกษา ไม่ใช่คำแนะนำซื้อขาย",
+  "author": {
+    "name": "boonchu"
+  },
+  "homepage": "https://github.com/BoonchuTummeng/stock-deepdive-loop",
+  "repository": "https://github.com/BoonchuTummeng/stock-deepdive-loop",
+  "license": "MIT",
+  "keywords": [
+    "stocks",
+    "equity-research",
+    "knowledge-base",
+    "sec-edgar",
+    "thai-stocks",
+    "set"
+  ]
+}

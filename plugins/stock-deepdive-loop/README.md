@@ -23,7 +23,6 @@ Claude Code:
 ถ้ามี `stock-deepdive-lite` ติดตั้งอยู่แล้ว **ทำเหมือนเดิมได้เลย** — นี่เป็น marketplace คนละตัว (`boonchu-loop`) ไม่แตะของเดิม · อัปเดตภายหลัง: `/plugin marketplace update boonchu-loop`
 พิมพ์ `/stock-deepdive-loop` ต้องเห็น 4 คำสั่ง
 
-**Codex** — ที่ terminal พิมพ์ `codex plugin marketplace add BoonchuTummeng/stock-deepdive-loop` แล้ว `codex plugin add stock-deepdive-loop@boonchu-loop` · เปิดเธรดใหม่ · เรียกด้วย `$loop` `$questions` `$gate` `$vault` · ทดสอบแล้วว่าติดตั้งได้ ยังไม่ได้ทดสอบรันวงวิจัยบน Codex
 
 ## ใช้ยังไง
 | คำสั่ง | ทำอะไร |

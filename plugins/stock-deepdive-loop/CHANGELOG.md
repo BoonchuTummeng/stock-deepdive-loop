@@ -12,4 +12,4 @@
 - แก้ `extract.py`: `--no-overwrite` (ไม่ทับ .txt เดิมในคลัง) · `--manifest-dir` (ไม่วาง MANIFEST.md ในชั้นบนของคลัง) · ข้ามโฟลเดอร์ขึ้นต้น `_` — พบจากการทดสอบเคส E ว่าเวอร์ชันเดิมเขียนทับ .txt 17 ไฟล์และวาง MANIFEST.md ลงคลังตอนรันเคส A
 - ไลบรารีภายนอกตัวเดียว (ไม่บังคับ): yt-dlp สำหรับขั้นเทป Oppday
 - bin: ก๊อปจาก stock-deepdive-lite 1.0.0 (fetch_th · fetch_us · extract · build_paper · check_numbers) + `loop_state.py` (สถานะวง ทำต่อจากที่ค้าง)
-- รองรับ Claude Code และ Codex ด้วยเนื้อชุดเดียว (`AGENTS.md` + `ROOT.md`)
+- รองรับ Claude Code เท่านั้น (ตัด Codex ออก: ติดตั้งได้แต่ไม่ได้ทดสอบรันวง)

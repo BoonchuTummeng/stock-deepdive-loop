@@ -27,8 +27,7 @@ description: เก็บผลวิจัยหุ้นที่ตรวจ�
 ## หลังเสร็จ
 **ตรวจ Quote ด้วยสคริปต์ทุกครั้ง** (agent ตรวจตัวเองไม่พอ):
 ```
-python "${CLAUDE_PLUGIN_ROOT}/bin/check_quotes.py" <TICKER>    # Claude Code
-python "<ราก>/bin/check_quotes.py" <TICKER>                   # Codex
+python "${CLAUDE_PLUGIN_ROOT}/bin/check_quotes.py" <TICKER>
 ```
 **อ่านผลทั้งหมด ห้ามกรองด้วย head/tail และให้ดู "สรุป" บรรทัดสุดท้ายกับรหัสออก** (เคยมีเซสชันรายงานว่า "ผ่านทุก atom" จากผลที่เห็นแค่ครึ่งเดียว ทั้งที่มี atom ไม่ผ่าน) · exit 0 = ผ่านทุก atom · exit 1 = มี atom ไม่ผ่าน: `WRONG-FILE` แก้ `source_file` ให้เป็นไฟล์ที่ Quote อยู่จริง · `NOT-FOUND` / `NO-QUOTE` แก้ Quote ให้ตรงต้นฉบับ หรือ**ลบ atom นั้นออกจากคลัง**แล้วย้ายเป็นคำถามค้างใน `watchlist.md` · `NO-SOURCE` เปิดตรวจไม่ได้ ไม่ถือว่าผ่าน (แปลงไฟล์เป็น .txt ก่อน) · แก้แล้วรันซ้ำจนผ่าน อย่ารายงานว่า L8 เสร็จก่อน
 อ่านกลับทุกไฟล์ยืนยันว่าลงดิสก์จริง (ไฟล์ที่ agent บอกว่าเขียนแต่ไม่มี = ทำใหม่) · รัน `loop_state.py done <TICKER> L8` ถ้ามาจากวงเต็ม

@@ -28,15 +28,14 @@ description: วงวิจัยหุ้นครบวง L0–L8 บนโ�
 รอผู้ใช้เลือก · ถ้าเลือก (2) บันทึกลง `idea-card.md` และรายงานท้ายวงว่า "L3 ไม่ผ่าน notebook"
 **ระหว่างวงถ้า `nlm` ล้ม (login หมดอายุกลางทาง)** ใช้ข้อความเดียวกัน ณ จุดนั้น แล้วทำต่อด้วยโหมดอ่านเองจากข้อที่ค้าง
 
-**P5 สคริปต์** — ทุกช่องคำสั่งมีสองบรรทัด **รันบรรทัดเดียว**: Claude Code ใช้บรรทัดบน (`${CLAUDE_PLUGIN_ROOT}` ถูกแทนเป็น path จริงในข้อความของ skill นี้ตอนโหลด — ตรวจแล้วหลังติดตั้งจาก GitHub — แต่ **ไม่มีอยู่ใน environment ของ Bash**: ถ้าพิมพ์คำสั่งใหม่เองที่ไม่ได้มากับ skill ให้ใช้ path จริงที่เห็นในบรรทัดคำสั่งเหล่านี้ ห้ามพิมพ์ตัวแปรเปล่า ๆ) · Codex ใช้บรรทัดล่าง (แทน `<ราก>` ด้วย path จริง)
+**P5 สคริปต์** — คำสั่งในช่องข้างล่างใช้ `${CLAUDE_PLUGIN_ROOT}` ซึ่งถูกแทนเป็น path จริงในข้อความของ skill นี้ตอนโหลด (ตรวจแล้วหลังติดตั้งจาก GitHub) แต่ **ไม่มีอยู่ใน environment ของ Bash**: ถ้าพิมพ์คำสั่งใหม่เองที่ไม่ได้มากับ skill ให้ใช้ path จริงที่เห็นในบรรทัดคำสั่งเหล่านี้ ห้ามพิมพ์ตัวแปรเปล่า ๆ · ตรวจครั้งเดียวว่า `extract.py --help` ไม่ error ก่อนใช้จริง
 
 **P5a ส่ง path ให้ agent ย่อย** — agent ย่อย (collector, factcheck, checker, vault, writer) **ไม่รู้จัก `<ราก>`** และไม่เห็นตัวแปรข้างบน ให้จด path จริงของโฟลเดอร์ปลั๊กอินจากบรรทัดคำสั่งใน skill นี้ แล้ว**ส่ง path เต็มของ `bin/` และ `references/` ในทุก prompt ที่เรียก agent เหล่านี้** ไม่งั้นมันจะหา `bin/...` หรือ `references/...` ไม่เจอ · ตรวจครั้งเดียวว่า `python "<ราก>/bin/extract.py" --help` ไม่ error ก่อนใช้จริง
 
 **P6 สถานะเดิม** — รัน `loop_state.py status <TICKER>` ถ้ามีขั้นที่เสร็จแล้ว (และไฟล์ผลยังอยู่) **ข้ามขั้นนั้น**; ขั้นที่ขึ้น `stale` ให้ทำใหม่
 
 ```
-python "${CLAUDE_PLUGIN_ROOT}/bin/loop_state.py" status <TICKER>    # Claude Code
-python "<ราก>/bin/loop_state.py" status <TICKER>                   # Codex
+python "${CLAUDE_PLUGIN_ROOT}/bin/loop_state.py" status <TICKER>
 ```
 
 **P7 แจ้งผู้ใช้ตอนต้น** — เวลาโดยประมาณ · มีจุดหยุดรอ 2 จุด (หลัง L1, หลัง L7) · ถ้ามี `quick` บอกว่าข้ามอะไร
@@ -58,8 +57,7 @@ python "<ราก>/bin/loop_state.py" status <TICKER>                   # Codex
 เรียก agent **collector** · **หุ้นไทยดึงเทป Oppday อัตโนมัติด้วย** (2 งวดล่าสุดจากช่อง SET Thailand เข้า notebook + เก็บข้อความถ้าดึงได้ — เสียง ASR ถือเป็นคำอ้างผู้บริหาร) · ใช้ `ทุกบริษัท\<TICKER>\` ก่อน ขาดค่อยดึง (`fetch_th.py` / `fetch_us.py`) วาง**แบบไม่ทับ** + `.txt` + เติม notebook "<TICKER>" ถ้ามี nlm + อัปเดต `notebooks-index.md`
 จากนั้นรัน `extract.py` กับโฟลเดอร์หุ้น **ด้วยโหมดปลอดภัยเสมอ** (ห้ามรันแบบไม่มีสองตัวเลือกนี้ — ไม่งั้นมันเขียนทับ `.txt` ในคลังและวาง MANIFEST.md ลงชั้นบน):
 ```
-python "${CLAUDE_PLUGIN_ROOT}/bin/extract.py" "<ทุกบริษัท>/<TICKER>" --no-overwrite --manifest-dir ./paper/_work/<TICKER>    # Claude Code
-python "<ราก>/bin/extract.py" "<ทุกบริษัท>/<TICKER>" --no-overwrite --manifest-dir ./paper/_work/<TICKER>                   # Codex
+python "${CLAUDE_PLUGIN_ROOT}/bin/extract.py" "<ทุกบริษัท>/<TICKER>" --no-overwrite --manifest-dir ./paper/_work/<TICKER>
 ```
 → ได้ `./paper/_work/<TICKER>/MANIFEST.md` (โฟลเดอร์ `_analysis` `_reference` ถูกข้าม · `.txt` ที่มีแล้วใช้ของเดิม) · **อ่าน MANIFEST ก่อน แล้วส่ง path ให้ทุก agent** (ไฟล์ .txt ที่แปลงแล้ว ห้าม agent ไปแกะ .docx/.xlsx เอง · หน้าสแกนต้องเปิดด้วย Read ระบุ pages)
 
@@ -126,8 +124,7 @@ python "<ราก>/bin/extract.py" "<ทุกบริษัท>/<TICKER>" --n
 ## L7 — เย็บรายงาน ⏱ ~4 นาที
 1. ประกอบ → `./paper/<TICKER>-loop-<วันที่>.html`
 ```
-python "${CLAUDE_PLUGIN_ROOT}/bin/build_paper.py" --parts ./paper/_parts --out ./paper/<TICKER>-loop-<วันที่>.html --title "<TICKER> — หัวเรื่อง" --subtitle "คำโปรย" --tag "<ตลาด> · <TICKER>" --tag "<วันที่>" --sources "เอกสารที่ใช้…"    # Claude Code
-python "<ราก>/bin/build_paper.py" --parts ./paper/_parts --out ./paper/<TICKER>-loop-<วันที่>.html --title "<TICKER> — หัวเรื่อง" --subtitle "คำโปรย" --tag "<ตลาด> · <TICKER>" --tag "<วันที่>" --sources "เอกสารที่ใช้…"                   # Codex
+python "${CLAUDE_PLUGIN_ROOT}/bin/build_paper.py" --parts ./paper/_parts --out ./paper/<TICKER>-loop-<วันที่>.html --title "<TICKER> — หัวเรื่อง" --subtitle "คำโปรย" --tag "<ตลาด> · <TICKER>" --tag "<วันที่>" --sources "เอกสารที่ใช้…"
 ```
 ออกด้วยรหัส 2 = โครงมีปัญหา ต้องแก้ก่อน
 2. ตรวจตัวเลขหลุดจาก FACTS: `check_numbers.py <html> ./paper/<TICKER>-FACTS.md` (ตัวไหนหลุด: เพิ่มใน FACTS พร้อมแหล่ง · หรือกำกับ `[คำนวณ]` · หรือเอาออก) — นี่คือ**ตะแกรง ไม่ใช่การพิสูจน์ว่าถูก**
